@@ -29,6 +29,7 @@ $(function () {
         it('Valid Link', function () {
             for (let feed of allFeeds) {
                 expect(feed.url).toBeDefined();
+                expect(feed.url).not.toBe('');
             }
         });
 
@@ -37,7 +38,8 @@ $(function () {
          */
         it('Valid name', function () {
             for (let feed of allFeeds) {
-                expect(feed.name).toBeDefined;
+                expect(feed.name).toBeDefined();
+                expect(feed.name).not.toBe('');
             }
         });
     });
@@ -51,7 +53,7 @@ $(function () {
          * 来搞清楚我们是怎么实现隐藏/展示菜单元素的。
          */
         it('Hide menu', function(){
-            expect($('body').attr('class')).toBe('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
         
         
@@ -108,10 +110,11 @@ $(function () {
             })
         });
         
-        it('content should change', function(){
+        it('content should change', function(done){
             //载入第二个feed，和前面的进行比较
             loadFeed(1, function(){
-                expect($('.feed').html().not.toEqual(feed0));
+                expect($('.feed').html()).not.toEqual(feed0);
+                done();
             }) 
         });
     });
